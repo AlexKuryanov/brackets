@@ -1,17 +1,25 @@
 module.exports = function check(str, bracketsConfig) {
-  let arr = [];
-  for (let i = 0; i < bracketsConfig.length; i++) {
-    arr.push(bracketsConfig[i].join(''));
-    console.log(arr);
+  let count = 0;
+  if (str.length % 2 !== 0) {
+   return false;
+ } else {
+   
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === bracketsConfig[0][0] || 
+          str[i] === bracketsConfig[1][0]) {
+        count++;
+      } else if (str[i] === bracketsConfig[0][1] || 
+                 str[i] === bracketsConfig[1][1]) {
+        count--;
+        }
+    }    
+   }
+  if (count % 2 === 0) {
+    return true;
+  } else {
+    return false;
   }
-  for (let i = 0; i < arr.length; i++) {
-    if (str === arr[i]) {
-      return true;
-    } else {
-      return false;
-    }
-  }  
-  } 
+} 
 
 /*
 второй аргумент - это массив. Раздели этот массив на элементы, и увидишь, что в каждом элементе есть две составляющие:
