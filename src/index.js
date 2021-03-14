@@ -3,29 +3,84 @@ module.exports = function check(str, bracketsConfig) {
   if (str.length % 2 !== 0) {
    return false;
  } else {
-   let arr = [];
-  for (let i = 0; i < bracketsConfig.length; i++) {
-    arr.push(bracketsConfig[i].join(''));
-  }
+   let open = [];
+   let close = [];
+   for (let i = 0; i < bracketsConfig.length; i++) {
+     open.push(bracketsConfig[i][0]);
+     close.push(bracketsConfig[i][1]);   
+     
+   }
+    console.log(open);
+     console.log(close);
+    
     let i = 0;
-    while (i < arr.length) {
-      if (str.indexOf(arr[i], 0) === -1 && i < arr.length) {
-      i++;
-      } else if (str.indexOf(arr[i], 0) >= 0) {
-        str = str.split('');
-str = str.slice( str.indexOf(arr[i], 0), str.indexOf((arr[i], 0) + 1) );
-        str = str.join('');
-           if (str === '') {
-             return true;
-           } else {
-             return false;
-           }
-      } else {
-          i++;
+    let count = 0;
+    if (!open.includes(str[0])) {
+          return false;
         } 
-    }
+    while (i < str.length) {    
+      if (close.includes(str[i]) && open.includes(str[i])) {
+        let closeBr = open.indexOf(str[count-1]);
+        if (close[closeBr] === str[i]) {
+          console.log(str);
+          let substr = str.substring(i-1, i+1);
+          console.log(substr);
+          str = str.replace(substr, '');
+          console.log(str);
+          //count--;
+          count--;
+          i--;
+          console.log(i);
+          console.log(count);
+          console.log();
+        
+        } else if (open.includes(str[i])) {
+          console.log(str[i]);
+          console.log(count);
+          i++;
+          count++;
+        } 
+      } else if (open.includes(str[i])) {
+        console.log(str[i]);
+        console.log(count);
+        i++;
+        count++;
+      } else if (close.includes(str[i])) {
+        //console.log(str);
+        //if (str[i - (i - (count - 1))] === str[i]) {
+        console.log();
+        console.log(count);
+        console.log(i);
+        console.log(str[i]);
+        console.log();
+        
+        let closeBr = open.indexOf(str[count-1]);
+        if (close[closeBr] === str[i]) {
+          console.log(str);
+          let substr = str.substring(i-1, i+1);
+          console.log(substr);
+          str = str.replace(substr, '');
+          console.log(str);
+          //count--;
+          count--;
+          i--;
+          console.log(i);
+          console.log(count);
+          console.log();
+        
+        } else {
+        return false;
+      }
+        
+      } else {
+        return false;
+      }
+      
+    }  
+    return true;
   }
-}
+} 
+
 
 /*
 второй аргумент - это массив. Раздели этот массив на элементы, и увидишь, что в каждом элементе есть две составляющие:
