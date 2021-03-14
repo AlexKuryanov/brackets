@@ -1,25 +1,31 @@
 module.exports = function check(str, bracketsConfig) {
-  let count = 0;
+  
   if (str.length % 2 !== 0) {
    return false;
  } else {
-   
-    for (let i = 0; i < str.length; i++) {
-      if (str[i] === bracketsConfig[0][0] || 
-          str[i] === bracketsConfig[1][0]) {
-        count++;
-      } else if (str[i] === bracketsConfig[0][1] || 
-                 str[i] === bracketsConfig[1][1]) {
-        count--;
-        }
-    }    
-   }
-  if (count % 2 === 0) {
-    return true;
-  } else {
-    return false;
+   let arr = [];
+  for (let i = 0; i < bracketsConfig.length; i++) {
+    arr.push(bracketsConfig[i].join(''));
   }
-} 
+    let i = 0;
+    while (i < arr.length) {
+      if (str.indexOf(arr[i], 0) === -1 && i < arr.length) {
+      i++;
+      } else if (str.indexOf(arr[i], 0) >= 0) {
+        str = str.split('');
+str = str.slice( str.indexOf(arr[i], 0), str.indexOf((arr[i], 0) + 1) );
+        str = str.join('');
+           if (str === '') {
+             return true;
+           } else {
+             return false;
+           }
+      } else {
+          i++;
+        } 
+    }
+  }
+}
 
 /*
 второй аргумент - это массив. Раздели этот массив на элементы, и увидишь, что в каждом элементе есть две составляющие:
